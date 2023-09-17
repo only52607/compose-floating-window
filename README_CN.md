@@ -1,4 +1,4 @@
-# ComposeFloatingWindow
+# compose-floating-window
 
 基于Jetpack Compose的全局悬浮窗框架
 
@@ -62,8 +62,7 @@ floatingWindow.setContent {
 floatingWindow.show()
 ```
 
-> 查看[示例程序]()，了解详细用法。
-
+> 查看[示例程序](https://github.com/only52607/compose-floating-window/tree/master/app)，了解详细用法。
 
 ## 高级用法
 
@@ -89,7 +88,7 @@ val floatingWindow = LocalComposeFloatingWindow.current
 
 ### 显示对话框
 
-当悬浮窗的Context为Application时，在悬浮窗中使用`AlertDialog`和`Dialog`会出现token is null异常，这时可使用`SystemAlertDialog`或`SystemDialog`组件，用法与自带的`AlertDialog`和`Dialog`一致。
+当悬浮窗的Context为Application时，在悬浮窗的Compose界面中使用`AlertDialog`和`Dialog`会出现token is null异常，这时可使用`SystemAlertDialog`或`SystemDialog`组件，用法与自带的`AlertDialog`和`Dialog`一致。
 
 示例：
 ```kotlin
