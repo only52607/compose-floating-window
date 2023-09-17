@@ -35,8 +35,15 @@ dependencyResolutionManagement {
 - 添加ComposeFloatingWindow依赖
 ```groovy
 dependencies {
-    implementation ""
+    implementation "com.github.only52607:ComposeFloatingWindow:1.0"
 }
+```
+
+### 增加悬浮窗权限
+
+在`AndroidManifest.xml`中添加
+```xml
+<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 ```
 
 ### 创建悬浮窗并显示
@@ -74,7 +81,7 @@ FloatingActionButton(
 
 ### 获取当前ComposeFloatingWindow实例
 
-使用`LocalComposeFloatingWindow获取`，示例：
+使用`LocalComposeFloatingWindow`获取，示例：
 
 ```kotlin
 val floatingWindow = LocalComposeFloatingWindow.current
@@ -86,7 +93,17 @@ val floatingWindow = LocalComposeFloatingWindow.current
 
 示例：
 ```kotlin
-
+SystemAlertDialog(
+    onDismissRequest = { showDialog = false },
+    confirmButton = {
+        TextButton(onClick = { showDialog = false }) {
+            Text(text = "OK")
+        }
+    },
+    text = {
+        Text(text = "This is a system dialog")
+    }
+)
 ```
 
 ### 使用ViewModel
