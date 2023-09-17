@@ -25,6 +25,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.github.only52607.compose.window.ui.FloatingWindowContent
 import com.github.only52607.compose.window.ui.theme.ComposeFloatingWindowTheme
 
 class MainActivity : ComponentActivity() {
@@ -63,29 +65,7 @@ class MainActivity : ComponentActivity() {
     private fun createFloatingWindow() {
         floatingWindow = ComposeFloatingWindow(applicationContext)
         floatingWindow.setContent {
-            var showDialog by remember {
-                mutableStateOf(false)
-            }
-            if (showDialog) {
-                SystemAlertDialog(
-                    onDismissRequest = { showDialog = false },
-                    confirmButton = {
-                        TextButton(onClick = { showDialog = false }) {
-                            Text(text = "OK")
-                        }
-                    },
-                    text = {
-                        Text(text = "This is a system dialog")
-                    }
-                )
-            }
-            FloatingActionButton(
-                modifier = Modifier.dragFloatingWindow(),
-                onClick = {
-                    showDialog = !showDialog
-                }) {
-                Icon(Icons.Filled.Call, "Call")
-            }
+            FloatingWindowContent()
         }
     }
 

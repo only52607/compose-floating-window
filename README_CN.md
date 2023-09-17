@@ -107,4 +107,19 @@ SystemAlertDialog(
 
 ### 使用ViewModel
 
+通过调用 viewModel() 函数，从任何可组合项访问 ViewModel。
+
+```kotlin
+class MyViewModel : ViewModel() { /*...*/ }
+
+@Composable
+fun MyScreen(
+    viewModel: MyViewModel = viewModel()
+) {
+    // use viewModel here
+}
+```
+
+> 详情请参照[Android文档](https://developer.android.com/jetpack/compose/libraries#viewmodel)
+
 ## License

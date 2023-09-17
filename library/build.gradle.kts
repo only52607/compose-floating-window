@@ -45,6 +45,8 @@ android {
     }
 }
 
+version = 1.0
+
 dependencies {
     implementation(platform("androidx.compose:compose-bom:2023.03.00"))
     implementation("androidx.compose.ui:ui")
@@ -69,7 +71,6 @@ publishing {
         create<MavenPublication>("release") {
             groupId = "com.github.only52607"
             artifactId = "compose-floating-window"
-            version = "1.1"
             afterEvaluate {
                 from(components["release"])
             }

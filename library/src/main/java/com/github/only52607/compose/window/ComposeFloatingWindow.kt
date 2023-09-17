@@ -1,6 +1,7 @@
 package com.github.only52607.compose.window
 
 import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.graphics.PixelFormat
 import android.os.Build
@@ -19,6 +20,7 @@ import androidx.lifecycle.HasDefaultViewModelProviderFactory
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.SAVED_STATE_REGISTRY_OWNER_KEY
+import androidx.lifecycle.SavedStateViewModelFactory
 import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
@@ -35,11 +37,26 @@ import androidx.savedstate.SavedStateRegistryOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import kotlinx.coroutines.launch
 
-open class ComposeFloatingWindow(
+class ComposeFloatingWindow(
     val context: Context
 ) : SavedStateRegistryOwner, ViewModelStoreOwner, HasDefaultViewModelProviderFactory {
-    override val defaultViewModelProviderFactory: ViewModelProvider.Factory = object :
-        ViewModelProvider.Factory {}
+
+    override val defaultViewModelProviderFactory: ViewModelProvider.Factory by lazy {
+        SavedStateViewModelFactory(
+            context.applicationContext as Application,
+            this@ComposeFloatingWindow,
+            null
+        )
+    }
+
+    override val defaultViewModelCreationExtras: CreationExtras = MutableCreationExtras().apply {
+        val application = context.applicationContext?.takeIf { it is Application }
+        if (application != null) {
+            set(ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY, application as Application)
+        }
+        set(SAVED_STATE_REGISTRY_OWNER_KEY, this@ComposeFloatingWindow)
+        set(VIEW_MODEL_STORE_OWNER_KEY, this@ComposeFloatingWindow)
+    }
 
     override val viewModelStore: ViewModelStore = ViewModelStore()
 
@@ -49,9 +66,6 @@ open class ComposeFloatingWindow(
     private var savedStateRegistryController: SavedStateRegistryController =
         SavedStateRegistryController.create(this)
     override val savedStateRegistry: SavedStateRegistry get() = savedStateRegistryController.savedStateRegistry
-
-    private val _defaultViewModelCreationExtras = MutableCreationExtras()
-    override val defaultViewModelCreationExtras: CreationExtras = _defaultViewModelCreationExtras
 
     private var showing = false
     var decorView: ViewGroup = FrameLayout(context)
@@ -136,10 +150,6 @@ open class ComposeFloatingWindow(
     init {
         savedStateRegistryController.performRestore(null)
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_CREATE)
-        _defaultViewModelCreationExtras.apply {
-            set(SAVED_STATE_REGISTRY_OWNER_KEY, this@ComposeFloatingWindow)
-            set(VIEW_MODEL_STORE_OWNER_KEY, this@ComposeFloatingWindow)
-        }
         enableSavedStateHandles()
     }
 }
