@@ -1,5 +1,7 @@
 # compose-floating-window
 
+[![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 基于Jetpack Compose的全局悬浮窗框架
 
 ## 效果预览
@@ -7,7 +9,7 @@
 ## 特性
 
 - 使用Compose代码描述悬浮窗界面
-- 基于Hilt的ViewModel依赖注入支持
+- ViewModel支持
 - 可拖拽悬浮窗支持
 - 基于Application Context的对话框组件
 
@@ -123,3 +125,5 @@ fun MyScreen(
 > 详情请参照[Android文档](https://developer.android.com/jetpack/compose/libraries#viewmodel)
 
 ## License
+
+Apache 2.0 License
