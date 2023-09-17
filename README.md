@@ -3,24 +3,26 @@
 [![Release](https://jitpack.io/v/only52607/compose-floating-window.svg)](https://jitpack.io/#User/Repo)
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
-基于Jetpack Compose的全局悬浮窗框架
+Global Floating Window Framework based on Jetpack Compose
 
-## 效果预览
+[简体中文](README_CN.md)
+
+## Preview
 
 ![Preview](/preview/example.gif)
 
-## 特性
+## Features
 
-- 使用Compose代码描述悬浮窗界面
-- ViewModel支持
-- 可拖拽悬浮窗支持
-- 基于Application Context的对话框组件
+- Using Compose code to describe the floating window interface.
+- ViewModel support.
+- Support for draggable floating windows.
+- Dialog components based on the Application Context.
 
-## 基本使用
+## Basic Usage
 
-### 导入依赖
+### Import Dependencies
 
-- 如果Gradle版本小于7.0，在应用的`build.gradle`中，添加Jitpack仓库
+- If the Gradle version is less than 7.0, add the Jitpack repository in the `build.gradle` of your app.
 
 ```groovy
 repositories {
@@ -28,7 +30,7 @@ repositories {
 }
 ```
 
-- 如果Gradle版本大于等于7.0，在 settings.gradle 文件中加入
+- If the Gradle version is greater than or equal to 7.0, add it in the settings.gradle file.
 ```groovy
 dependencyResolutionManagement {
     repositories {
@@ -37,21 +39,21 @@ dependencyResolutionManagement {
 }
 ```
 
-- 添加ComposeFloatingWindow依赖
+- Add `compose-floating-window` Dependency
 ```groovy
 dependencies {
-    implementation "com.github.only52607:ComposeFloatingWindow:1.0"
+    implementation "com.github.only52607:compose-floating-window:1.0"
 }
 ```
 
-### 增加悬浮窗权限
+### Grant Floating Window Permission
 
-在`AndroidManifest.xml`中添加
+Add to `AndroidManifest.xml`
 ```xml
 <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 ```
 
-### 创建悬浮窗并显示
+### Create Floating Window and Show
 
 ```kotlin
 val floatingWindow = ComposeFloatingWindow(applicationContext)
@@ -67,13 +69,13 @@ floatingWindow.setContent {
 floatingWindow.show()
 ```
 
-> 查看[示例程序](https://github.com/only52607/compose-floating-window/tree/master/app)，了解详细用法。
+> See [Sample App](https://github.com/only52607/compose-floating-window/tree/master/app).
 
-## 高级用法
+## Advanced Usage
 
-### 创建可拖拽的悬浮窗
+### Make Floating Window Draggable
 
-在需要拖拽的组件上使用`Modifier.dragFloatingWindow()`修饰符，示例：
+Use the `Modifier.dragFloatingWindow()` modifier on the component you want to make draggable. Example:
 
 ```kotlin
 FloatingActionButton(
@@ -85,17 +87,17 @@ FloatingActionButton(
 
 ### 获取当前ComposeFloatingWindow实例
 
-使用`LocalComposeFloatingWindow`获取，示例：
+Using LocalComposeFloatingWindow to retrieve, here's an example:
 
 ```kotlin
 val floatingWindow = LocalComposeFloatingWindow.current
 ```
 
-### 显示对话框
+### Show Dialog
 
-当悬浮窗的Context为Application时，在悬浮窗的Compose界面中使用`AlertDialog`和`Dialog`会出现token is null异常，这时可使用`SystemAlertDialog`或`SystemDialog`组件，用法与自带的`AlertDialog`和`Dialog`一致。
+When the Context of the floating window is set to Application, using AlertDialog and Dialog in the Compose interface of the floating window may result in a 'token is null' exception. In such cases, you can use the SystemAlertDialog or SystemDialog components, which can be used in the same way as the built-in AlertDialog and Dialog components.
 
-示例：
+Example：
 ```kotlin
 SystemAlertDialog(
     onDismissRequest = { showDialog = false },
@@ -110,9 +112,9 @@ SystemAlertDialog(
 )
 ```
 
-### 使用ViewModel
+### ViewModel
 
-通过调用 viewModel() 函数，从任何可组合项访问 ViewModel。
+You can access the ViewModel from any Composable by calling the viewModel() function.
 
 ```kotlin
 class MyViewModel : ViewModel() { /*...*/ }
@@ -125,7 +127,7 @@ fun MyScreen(
 }
 ```
 
-> 详情请参照[Android文档](https://developer.android.com/jetpack/compose/libraries#viewmodel)
+> See https://developer.android.com/jetpack/compose/libraries#viewmodel
 
 ## License
 
