@@ -85,7 +85,7 @@ FloatingActionButton(
 }
 ```
 
-### 获取当前ComposeFloatingWindow实例
+### Get the current instance of `ComposeFloatingWindow`
 
 Using LocalComposeFloatingWindow to retrieve, here's an example:
 
