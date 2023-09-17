@@ -124,28 +124,5 @@ fun SystemAlertDialog(
     }
 }
 
-/**
- * Contains default values used for [AlertDialog]
- */
-object AlertDialogDefaults {
-    /** The default shape for alert dialogs */
-    val shape: Shape @Composable get() = DialogTokens.ContainerShape.toShape()
-
-    /** The default container color for alert dialogs */
-    val containerColor: Color @Composable get() = DialogTokens.ContainerColor.toColor()
-
-    /** The default icon color for alert dialogs */
-    val iconContentColor: Color @Composable get() = DialogTokens.IconColor.toColor()
-
-    /** The default title color for alert dialogs */
-    val titleContentColor: Color @Composable get() = DialogTokens.HeadlineColor.toColor()
-
-    /** The default text color for alert dialogs */
-    val textContentColor: Color @Composable get() = DialogTokens.SupportingTextColor.toColor()
-
-    /** The default tonal elevation for alert dialogs */
-    val TonalElevation: Dp = DialogTokens.ContainerElevation
-}
-
 private val ButtonsMainAxisSpacing = 8.dp
 private val ButtonsCrossAxisSpacing = 12.dp
