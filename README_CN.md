@@ -6,6 +6,8 @@
 
 ## 效果预览
 
+![Preview](/preview/example.gif)
+
 ## 特性
 
 - 使用Compose代码描述悬浮窗界面
