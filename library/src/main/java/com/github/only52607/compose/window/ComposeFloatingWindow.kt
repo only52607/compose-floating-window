@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Context
 import android.graphics.PixelFormat
 import android.os.Build
+import android.provider.Settings
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
@@ -38,7 +39,7 @@ import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import kotlinx.coroutines.launch
 
 class ComposeFloatingWindow(
-    val context: Context
+    private val context: Context
 ) : SavedStateRegistryOwner, ViewModelStoreOwner, HasDefaultViewModelProviderFactory {
 
     override val defaultViewModelProviderFactory: ViewModelProvider.Factory by lazy {
@@ -111,6 +112,7 @@ class ComposeFloatingWindow(
     }
 
     fun show() {
+        if(isAvailable().not()) return
         require(decorView.childCount != 0) {
             "Content view cannot be empty"
         }
@@ -139,13 +141,13 @@ class ComposeFloatingWindow(
     }
 
     fun hide() {
-        if (!showing) {
-            return
-        }
+        if (!showing) return
         showing = false
         windowManager.removeViewImmediate(decorView)
         lifecycleRegistry.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
     }
+
+    fun isAvailable(): Boolean = Settings.canDrawOverlays(context)
 
     init {
         savedStateRegistryController.performRestore(null)

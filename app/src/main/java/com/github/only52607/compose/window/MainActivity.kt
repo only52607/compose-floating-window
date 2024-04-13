@@ -12,19 +12,26 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.github.only52607.compose.window.ui.DialogPermission
 import com.github.only52607.compose.window.ui.FloatingWindowContent
 import com.github.only52607.compose.window.ui.theme.ComposeFloatingWindowTheme
 
 class MainActivity : ComponentActivity() {
-    private lateinit var floatingWindow: ComposeFloatingWindow
+
+    private val floatingWindow by lazy {
+        createFloatingWindow()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeFloatingWindowTheme {
+                val showDialogPermission = remember { mutableStateOf(false) }
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -35,7 +42,11 @@ class MainActivity : ComponentActivity() {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Button(onClick = {
-                            show()
+                            if (floatingWindow.isAvailable()) {
+                                show()
+                            } else {
+                                showDialogPermission.value = true
+                            }
                         }) {
                             Text("Show")
                         }
@@ -46,27 +57,24 @@ class MainActivity : ComponentActivity() {
                             Text("Hide")
                         }
                     }
+                    DialogPermission(showDialogState = showDialogPermission)
                 }
             }
         }
     }
 
-    private fun createFloatingWindow() {
-        floatingWindow = ComposeFloatingWindow(applicationContext)
-        floatingWindow.setContent {
-            FloatingWindowContent()
+    private fun createFloatingWindow(): ComposeFloatingWindow =
+        ComposeFloatingWindow(applicationContext).apply {
+            setContent {
+                FloatingWindowContent()
+            }
         }
-    }
 
     private fun show() {
-        if (!::floatingWindow.isInitialized) {
-            createFloatingWindow()
-        }
         floatingWindow.show()
     }
 
     private fun hide() {
-        if (!::floatingWindow.isInitialized) return
         floatingWindow.hide()
     }
 }
