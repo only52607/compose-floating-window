@@ -17,8 +17,10 @@
 @file:Suppress("INVISIBLE_MEMBER", "INVISIBLE_REFERENCE")
 package androidx.compose.material3
 
+import androidx.compose.material3.tokens.ColorSchemeKeyTokens
 import androidx.compose.material3.tokens.DialogTokens
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
@@ -124,5 +126,11 @@ fun SystemAlertDialog(
     }
 }
 
+/** Converts a color token key to the local color scheme provided by the theme */
+@ReadOnlyComposable
+@Composable
+internal fun ColorSchemeKeyTokens.toColor(): Color {
+    return MaterialTheme.colorScheme.fromToken(this)
+}
 private val ButtonsMainAxisSpacing = 8.dp
 private val ButtonsCrossAxisSpacing = 12.dp
