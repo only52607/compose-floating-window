@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ComposeFloatingWindow</string>
+    <string name="permission_required">Permission required</string>
+    <string name="grant_permission">Grant permission</string>
+    <string name="cancel">Cancel</string>
+    <string name="message_permission_to_draw_on_top_others_apps">…to show floating windows the app needs permissions to draw on top of other apps</string>
 </resources>
