@@ -38,26 +38,29 @@ import androidx.savedstate.SavedStateRegistryOwner
 import androidx.savedstate.setViewTreeSavedStateRegistryOwner
 import kotlinx.coroutines.launch
 
-
 class ComposeFloatingWindow(
     private val context: Context,
-    val windowParams: WindowManager.LayoutParams = WindowManager.LayoutParams().apply {
-        height = WindowManager.LayoutParams.WRAP_CONTENT
-        width = WindowManager.LayoutParams.WRAP_CONTENT
-        format = PixelFormat.TRANSLUCENT
-        gravity = Gravity.START or Gravity.TOP
-        windowAnimations = android.R.style.Animation_Dialog
-        flags = (WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
-                or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
-        if (context !is Activity) {
-            type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
-            } else {
-                WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
+    val windowParams: WindowManager.LayoutParams = defaultLayoutParams(context)
+) : SavedStateRegistryOwner, ViewModelStoreOwner, HasDefaultViewModelProviderFactory {
+
+    companion object {
+        fun defaultLayoutParams(context: Context) = WindowManager.LayoutParams().apply {
+            height = WindowManager.LayoutParams.WRAP_CONTENT
+            width = WindowManager.LayoutParams.WRAP_CONTENT
+            format = PixelFormat.TRANSLUCENT
+            gravity = Gravity.START or Gravity.TOP
+            windowAnimations = android.R.style.Animation_Dialog
+            flags = (WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL
+                    or WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+            if (context !is Activity) {
+                type = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY
+                } else {
+                    WindowManager.LayoutParams.TYPE_SYSTEM_ALERT
+                }
             }
         }
     }
-) : SavedStateRegistryOwner, ViewModelStoreOwner, HasDefaultViewModelProviderFactory {
 
     override val defaultViewModelProviderFactory: ViewModelProvider.Factory by lazy {
         SavedStateViewModelFactory(
