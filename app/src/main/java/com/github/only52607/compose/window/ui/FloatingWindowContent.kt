@@ -34,7 +34,7 @@ fun FloatingWindowContent(
     FloatingActionButton(
         modifier = Modifier.dragFloatingWindow(),
         onClick = {
-            floatingWindow.hide()
+            model.showDialog()
         }) {
         Icon(Icons.Filled.Call, "Call")
     }
