@@ -5,7 +5,7 @@ min-sdk = "24"
 
 agp = "8.9.1"
 kotlin = "2.1.20"
-android-library = "8.3.2"
+android-library = "8.9.1"
 
 android-core-ktx = "1.9.0"
 appcompat = "1.6.1"
