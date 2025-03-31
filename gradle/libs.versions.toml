@@ -5,7 +5,6 @@ min-sdk = "24"
 
 agp = "8.9.1"
 kotlin = "2.1.20"
-android-library = "8.9.1"
 
 android-core-ktx = "1.15.0"
 appcompat = "1.6.1"
@@ -49,6 +48,6 @@ google-material = { module = "com.google.android.material:material", version.ref
 [plugins]
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 agp = { id = "com.android.application", version.ref = "agp" }
-android-library = { id = "com.android.library", version.ref = "android-library" }
+android-library = { id = "com.android.library", version.ref = "agp" }
 
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
