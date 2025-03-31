@@ -1,4 +1,4 @@
-package com.github.only52607.compose.window.ui
+package com.github.only52607.compose.window.app.ui
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Call
