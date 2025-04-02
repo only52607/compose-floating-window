@@ -30,6 +30,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.SystemDialog
 import androidx.compose.ui.window.SystemDialogProperties
+import androidx.compose.material3.internal.getString
+import androidx.compose.material3.internal.Strings
 
 /**
  * <a href="https://m3.material.io/components/dialogs/overview" class="external" target="_blank">Material Design basic dialog</a>.
@@ -94,6 +96,7 @@ fun SystemAlertDialog(
         onDismissRequest = onDismissRequest,
         properties = properties
     ) {
+        // getString was found on the internals of `BasicAlertDialog`
         val dialogPaneDescription = getString(Strings.Dialog)
         AlertDialogContent(
             buttons = {

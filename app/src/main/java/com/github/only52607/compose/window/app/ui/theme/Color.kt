@@ -1,4 +1,4 @@
-package com.github.only52607.compose.window.ui.theme
+package com.github.only52607.compose.window.app.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

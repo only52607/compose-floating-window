@@ -1,4 +1,4 @@
-package com.github.only52607.compose.window.ui
+package com.github.only52607.compose.window.app.ui
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
